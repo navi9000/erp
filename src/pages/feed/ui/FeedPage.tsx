@@ -7,7 +7,7 @@ const FeedPage = () => {
   const { data, error } = useLoaderData<FeedLoader>()
 
   return (
-    <Layout>
+    <Layout style={{ minHeight: "inherit" }}>
       <Layout.Header>
         <Flex justify="flex-end" align="center">
           <Form method="post">
@@ -15,15 +15,23 @@ const FeedPage = () => {
           </Form>
         </Flex>
       </Layout.Header>
-      <Layout.Content>
+      <Layout.Content style={{ height: "100%", padding: "20px" }}>
         {data ? (
-          <Card>
-            <Image src={data.avatar} />
-            <Typography>{data.username}</Typography>
-            <Typography>{data.about}</Typography>
+          <Card
+            style={{ width: "200px", marginInline: "auto", overflow: "hidden" }}
+            cover={
+              <Image
+                src={data.avatar}
+                height={200}
+                width={200}
+                preview={false}
+              />
+            }
+          >
+            <Card.Meta title={data.username} description={data.about} />
           </Card>
         ) : (
-          <Typography>{error}</Typography>
+          <Typography.Paragraph>{error}</Typography.Paragraph>
         )}
       </Layout.Content>
     </Layout>
