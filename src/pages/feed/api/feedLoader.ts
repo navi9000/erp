@@ -1,27 +1,18 @@
-import {
-  GET,
-  type ServerResponseMessage,
-  type UserResponseBody,
-} from "@/shared/api"
-import type { AxiosResponse } from "axios"
+import { GET, type UserResponseBody } from "@/shared/api"
+import { AxiosError } from "axios"
 
 export const feedLoader = async () => {
   try {
-    const { data, status, statusText } = await GET<
-      undefined,
-      AxiosResponse<UserResponseBody | ServerResponseMessage>
-    >("/about")
-    if (status === 200 && "data" in data) {
-      return {
-        data: data.data,
-        error: null,
-      }
+    const { data } = await GET<UserResponseBody>("/about")
+
+    return {
+      data: data.data,
+      error: null,
     }
-    throw statusText
   } catch (e) {
     let error
-    if (e instanceof Error) {
-      error = e.message
+    if (e instanceof AxiosError) {
+      error = e.response?.data.error ?? e.message
     } else if (typeof e === "string") {
       error = e
     } else {

@@ -1,11 +1,5 @@
-import {
-  POST,
-  setJWT,
-  type AuthRequestBody,
-  type LoginResponseBody,
-  type LoginResponseErrorBody,
-} from "@/shared/api"
-import { AxiosError, type AxiosResponse } from "axios"
+import { POST, setJWT, type LoginResponseBody } from "@/shared/api"
+import { AxiosError } from "axios"
 import { redirect } from "react-router"
 
 type Errors = {
@@ -35,15 +29,12 @@ export const loginAction = async ({ request }: { request: Request }) => {
   }
 
   try {
-    const { data } = await POST<
-      AuthRequestBody,
-      AxiosResponse<LoginResponseBody | LoginResponseErrorBody>
-    >("/login", {
+    const { data } = await POST<LoginResponseBody>("/login", {
       username,
       password,
     })
 
-    setJWT(data.token!)
+    setJWT(data.token)
 
     return redirect("/")
   } catch (e) {

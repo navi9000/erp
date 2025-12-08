@@ -1,9 +1,5 @@
-import {
-  POST,
-  type AuthRequestBody,
-  type ServerResponseMessage,
-} from "@/shared/api"
-import { AxiosError, type AxiosResponse } from "axios"
+import { POST, type ServerResponseMessage } from "@/shared/api"
+import { AxiosError } from "axios"
 import { redirect } from "react-router"
 
 type Errors = {
@@ -33,10 +29,7 @@ export const singUpAction = async ({ request }: { request: Request }) => {
   }
 
   try {
-    const { data } = await POST<
-      AuthRequestBody,
-      AxiosResponse<ServerResponseMessage>
-    >("/register", {
+    const { data } = await POST<ServerResponseMessage>("/register", {
       username,
       password,
     })
