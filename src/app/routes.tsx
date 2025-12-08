@@ -1,6 +1,6 @@
 import { FeedPage, feedLoader, logoutAction } from "@/pages/feed"
 import { loginAction, LoginPage } from "@/pages/login"
-import { RegisterPage, singInAction } from "@/pages/register"
+import { RegisterPage, singUpAction } from "@/pages/register"
 import { protectedRoute, publicRoute } from "@/shared/routes"
 import type { FC } from "react"
 import { createBrowserRouter } from "react-router"
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage />,
     loader: publicRoute(),
-    action: singInAction,
+    action: singUpAction,
   },
 ])
 

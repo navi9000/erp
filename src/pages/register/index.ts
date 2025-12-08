@@ -2,4 +2,4 @@ import RegisterPage from "./ui/RegisterPage"
 
 export { RegisterPage }
 
-export { singInAction } from "./api/signInAction"
+export { singUpAction } from "./api/signUpAction"

@@ -11,7 +11,7 @@ type Errors = {
   password?: string
 }
 
-export const singInAction = async ({ request }: { request: Request }) => {
+export const singUpAction = async ({ request }: { request: Request }) => {
   const formData = await request.formData()
   const username = formData.get("username")
   const password = formData.get("password")

@@ -1,1 +1,1 @@
-export const SERVER_ROOT = "http://localhost:8081"
+export const SERVER_ROOT = import.meta.env.VITE_SERVER_ROOT

@@ -5,7 +5,7 @@ import {
   type LoginResponseBody,
   type LoginResponseErrorBody,
 } from "@/shared/api"
-import type { AxiosResponse } from "axios"
+import { AxiosError, type AxiosResponse } from "axios"
 import { redirect } from "react-router"
 
 type Errors = {
@@ -43,23 +43,24 @@ export const loginAction = async ({ request }: { request: Request }) => {
       password,
     })
 
-    if (typeof data.error === "string") {
-      errors.username = data.error
-      errors.password = data.error
-      return {
-        errors,
-      }
-    }
-
-    setJWT(data.token)
+    setJWT(data.token!)
 
     return redirect("/")
   } catch (e) {
-    errors.username = "Неизвестная ошибка"
-    errors.password = "Неизвестная ошибка"
+    let error
+    if (e instanceof AxiosError) {
+      error = e.response?.data.error ?? e.message
+    } else if (typeof e === "string") {
+      error = e
+    } else {
+      e = "Неизвестная ошибка"
+    }
 
     return {
-      errors,
+      errors: {
+        username: error,
+        password: error,
+      },
     }
   }
 }
