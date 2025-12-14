@@ -11,12 +11,18 @@ const LoginPage: FC = () => {
 
   return (
     <Layout style={{ minHeight: "inherit" }}>
-      <Layout.Content style={{ minHeight: "inherit" }}>
+      <Layout.Content style={{ minHeight: "inherit", padding: "12px" }}>
         <Flex vertical gap="small" style={{ minHeight: "inherit" }}>
           <Form
             method="post"
             autoComplete="off"
-            style={{ width: "50%", marginInline: "auto", marginTop: "auto" }}
+            style={{
+              width: "100%",
+              marginInline: "auto",
+              marginTop: "auto",
+              minWidth: "296px",
+              maxWidth: "400px",
+            }}
           >
             <Flex vertical gap="small">
               <Input name="username" placeholder="Введите имя" />
