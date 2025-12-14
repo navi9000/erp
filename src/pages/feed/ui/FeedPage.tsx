@@ -2,6 +2,8 @@ import { Button, Card, Typography, Image, Layout, Flex } from "antd"
 import { useFetcher, useLoaderData } from "react-router"
 import type { FeedLoader } from "../api/feedLoader"
 
+const { Text } = Typography
+
 const FeedPage = () => {
   const { Form } = useFetcher()
   const { data, error } = useLoaderData<FeedLoader>()
@@ -31,7 +33,7 @@ const FeedPage = () => {
             <Card.Meta title={data.username} description={data.about} />
           </Card>
         ) : (
-          <Typography.Paragraph>{error}</Typography.Paragraph>
+          <Text type="danger">{error}</Text>
         )}
       </Layout.Content>
     </Layout>
